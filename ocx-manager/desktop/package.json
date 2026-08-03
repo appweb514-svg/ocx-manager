@@ -1,0 +1,62 @@
+{
+  "name": "ocx-switcher",
+  "productName": "OCX Switcher",
+  "version": "1.0.0",
+  "description": "Barre de tâches / plateau système pour switcher provider et modèle opencodex — Windows & Linux",
+  "main": "main.js",
+  "desktopName": "OCX Switcher",
+  "author": "Gildas",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win",
+    "dist:linux": "electron-builder --linux",
+    "dist:all": "electron-builder --win --linux"
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "dev.ocxmanager.switcher",
+    "productName": "OCX Switcher",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "assets/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../server.mjs",
+        "to": "server/server.mjs"
+      },
+      {
+        "from": "../public",
+        "to": "server/public"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "assets/icon-codex-black.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "OCX Switcher"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "assets/icon-codex-black.png",
+      "category": "Utility",
+      "syncDesktopName": true,
+      "synopsis": "Switch provider/modèle opencodex depuis le plateau système"
+    }
+  }
+}

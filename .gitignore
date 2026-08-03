@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+dist/
+
+# Journaux & fichiers générés localement
+*.log
+*.bak*
+outputs/
+work/
+
+# Secrets / configs locales (jamais versionnées)
+.env
+.env.*
+**/admin-api-token
+
+# Binaires de l'app macOS compilés localement (reconstruits par build-app.sh)
+ocx-manager/macos/OCXSwitcher.app/
+ocx-manager/macos/OCXSwitcher/OCXSwitcher
+ocx-manager/macos/OCXSwitcher/result_01.png
+
+# Builds desktop (Windows/Linux) — produits par electron-builder ou GitHub Actions
+ocx-manager/desktop/dist/

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCX Manager — Providers Codex</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">ocx</div>
+    <div>
+      <h1>OCX Manager</h1>
+      <p class="sub">Providers multi-modèles pour Codex via opencodex</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="health" id="health"><span class="dot"></span><span id="health-text">…</span></div>
+    <button class="btn ghost" id="btn-refresh" title="Rafraîchir">⟳</button>
+  </div>
+</header>
+
+<main>
+  <!-- Bandeau : modèle actif + switch rapide -->
+  <section class="card active-card" id="active-section">
+    <div class="card-title">
+      <h2>Modèle actif</h2>
+      <span class="hint">Ligne <code>model =</code> de <code>~/.codex/config.toml</code> — s’applique à la prochaine session Codex.</span>
+    </div>
+    <div class="active-row">
+      <div class="active-model" id="active-model">…</div>
+      <div class="switch-form">
+        <select id="switch-provider"></select>
+        <select id="switch-model"></select>
+        <button class="btn primary" id="btn-switch">Basculer</button>
+      </div>
+    </div>
+    <div class="note" id="switch-note"></div>
+  </section>
+
+  <!-- Providers -->
+  <section class="card">
+    <div class="card-title">
+      <h2>Providers</h2>
+      <button class="btn primary" id="btn-add-provider">＋ Ajouter un provider</button>
+    </div>
+    <div id="providers-list" class="providers"></div>
+  </section>
+</main>
+
+<!-- Modale : ajout / édition de provider -->
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">Ajouter un provider</h3>
+      <button class="btn ghost" id="modal-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="preset-zone">
+        <label>Preset rapide</label>
+        <select id="preset-select"><option value="">— Personnalisé —</option></select>
+        <p class="hint" id="preset-note"></p>
+      </div>
+      <label>Nom <span class="req">*</span></label>
+      <input id="f-name" placeholder="mon-provider" autocomplete="off" />
+      <label>Adapter <span class="req">*</span></label>
+      <select id="f-adapter">
+        <option value="openai-chat">openai-chat (OpenAI-compatible /v1)</option>
+        <option value="openai-responses">openai-responses (API Responses)</option>
+        <option value="anthropic">anthropic (Messages API)</option>
+        <option value="google">google (Gemini)</option>
+        <option value="azure-openai">azure-openai</option>
+        <option value="cursor">cursor</option>
+      </select>
+      <label>Base URL <span class="req">*</span></label>
+      <input id="f-baseurl" placeholder="https://api.exemple.com/v1" autocomplete="off" />
+      <label>Clé API</label>
+      <input id="f-apikey" type="password" placeholder="sk-…" autocomplete="off" />
+      <p class="hint">Stockée dans <code>~/.opencodex/config.json</code> (jamais renvoyée au navigateur ensuite).</p>
+      <label>Modèle par défaut</label>
+      <input id="f-defaultmodel" placeholder="ex. gpt-4o, claude-sonnet-4-5" autocomplete="off" />
+      <div class="checkbox-row">
+        <label class="check"><input type="checkbox" id="f-setdefault" /> Définir comme provider par défaut</label>
+        <label class="check"><input type="checkbox" id="f-privatenet" /> Autoriser réseau privé / localhost</label>
+      </div>
+      <div class="error" id="modal-error" hidden></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" id="modal-cancel">Annuler</button>
+      <button class="btn primary" id="modal-save">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modale : sélection des modèles exposés par un provider -->
+<div class="modal-backdrop" id="models-modal" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="models-modal-title">Modèles</h3>
+      <button class="btn ghost" id="models-modal-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="hint">Cochez les modèles à exposer dans Codex pour ce provider. Par défaut, tout est affiché.</p>
+      <div class="models-tools">
+        <span class="hint" id="models-summary"></span>
+        <div class="models-tools-btns">
+          <button class="btn small" id="models-show-all">👁 Tout afficher</button>
+          <button class="btn small" id="models-hide-all">🙈 Tout cacher</button>
+        </div>
+      </div>
+      <div class="models-checks" id="models-checks"></div>
+      <div class="error" id="models-error" hidden></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn primary" id="models-save">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-zone"></div>
+<script src="/app.js"></script>
+</body>
+</html>

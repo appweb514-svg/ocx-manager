@@ -1,0 +1,128 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  color-scheme: light dark;
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+  background: Canvas;
+  color: CanvasText;
+  font-size: 14px;
+  padding: 20px;
+  user-select: none;
+}
+
+h1 {
+  font-size: 17px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 14px 0 5px;
+  color: GrayText;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+  width: 100%;
+  font-size: 14px;
+  padding: 7px 9px;
+  border: 1px solid ButtonBorder;
+  border-radius: 6px;
+  background: Field;
+  color: FieldText;
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: AccentColor;
+  box-shadow: 0 0 0 2px color-mix(in srgb, AccentColor 30%, transparent);
+}
+
+textarea#apiKey {
+  height: 64px;            /* ~3 lignes visibles pour bien voir la clé */
+  resize: none;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  word-break: break-all;
+}
+
+.hint {
+  font-size: 11px;
+  color: GrayText;
+  margin-top: 4px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 2px;
+}
+
+.row input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: AccentColor;
+}
+
+.row label.model-name {
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  flex: 1;
+  user-select: text;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+button {
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 7px;
+  border: 1px solid ButtonBorder;
+  background: ButtonFace;
+  color: ButtonText;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(1.05); }
+button.primary {
+  background: AccentColor;
+  border-color: AccentColor;
+  color: AccentColorText;
+  font-weight: 600;
+}
+
+.status {
+  margin-top: 14px;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.status.ok { color: AccentColor; }
+.status.err { color: red; }
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: GrayText;
+}
+
+.list {
+  border: 1px solid ButtonBorder;
+  border-radius: 8px;
+  padding: 8px 10px;
+  max-height: 380px;
+  overflow-y: auto;
+}

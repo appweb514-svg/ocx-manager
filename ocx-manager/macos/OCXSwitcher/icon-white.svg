@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bolt" x1="0.2" y1="0.05" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#2f6bff"/>
+      <stop offset="0.5" stop-color="#1a4fe0"/>
+      <stop offset="1" stop-color="#5b3df5"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#1a4fe0" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1024" height="1024" fill="#ffffff"/>
+
+  <!-- Éclair principal -->
+  <g filter="url(#shadow)">
+    <path d="M 608 152 L 322 566 H 484 L 402 878 L 716 448 H 556 L 712 152 Z"
+          fill="url(#bolt)"/>
+    <path d="M 566 220 L 382 530 H 492 L 434 762 L 648 414 H 532 L 640 220 Z"
+          fill="url(#core)" opacity="0.5"/>
+  </g>
+</svg>
