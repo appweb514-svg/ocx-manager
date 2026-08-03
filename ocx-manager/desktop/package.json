@@ -5,7 +5,15 @@
   "description": "Barre de tâches / plateau système pour switcher provider et modèle opencodex — Windows & Linux",
   "main": "main.js",
   "desktopName": "OCX Switcher",
-  "author": "Gildas",
+  "author": {
+    "name": "Gildas",
+    "email": "appweb514@gmail.com"
+  },
+  "homepage": "https://github.com/appweb514-svg/ocx-manager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appweb514-svg/ocx-manager.git"
+  },
   "license": "MIT",
   "scripts": {
     "start": "electron .",
