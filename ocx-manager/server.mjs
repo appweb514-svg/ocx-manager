@@ -249,3 +249,13 @@ server.listen(APP_PORT, "127.0.0.1", () => {
   console.log(`OCX Manager  →  http://localhost:${APP_PORT}`);
   console.log(`Proxy opencodex attendu sur ${OCX_BASE} (token: ${TOKEN_PATH})`);
 });
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(`OCX Manager : le port ${APP_PORT} est déjà utilisé (serveur déjà lancé ?)`);
+    // Ne pas tuer un process hôte (ex : Electron embarquant ce module)
+    if (typeof process.versions.electron === "undefined") process.exit(0);
+  } else {
+    console.error(`OCX Manager : ${err.message}`);
+  }
+});

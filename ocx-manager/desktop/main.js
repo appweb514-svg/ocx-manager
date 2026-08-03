@@ -3,8 +3,8 @@
 // provider par défaut, ajout de provider, visibilité des modèles.
 const { app, Tray, Menu, BrowserWindow, ipcMain, shell, nativeImage } = require("electron");
 const path = require("path");
-const { spawn } = require("child_process");
 const fs = require("fs");
+const { pathToFileURL } = require("url");
 
 const MANAGER_URL = "http://127.0.0.1:10105";
 const REQUEST_TIMEOUT_MS = 6000;
@@ -74,13 +74,20 @@ function serverEntry() {
 }
 
 function startManagerServer() {
-  const entry = serverEntry();
-  const child = spawn(process.platform === "win32" ? "node.exe" : "node", [entry], {
-    detached: true,
-    stdio: "ignore",
-    windowsHide: true,
-  });
-  child.unref();
+  // Le serveur est un module Node pur : on l'importe dans le process Electron
+  // (Node est embarqué) — pas besoin d'un node.exe externe, même sous Windows.
+  startManagerServerInternal().catch((err) => console.error("démarrage serveur impossible :", err.message));
+}
+
+async function startManagerServerInternal() {
+  try {
+    const res = await fetch(`${MANAGER_URL}/local/state`, { signal: AbortSignal.timeout(1500) });
+    if (res.ok) return; // déjà lancé
+  } catch {
+    // serveur injoignable → on le démarre
+  }
+  await import(pathToFileURL(serverEntry()).href);
+  console.log("serveur OCX Manager démarré");
 }
 
 // ---------------------------------------------------------------------------
@@ -392,5 +399,6 @@ if (!gotLock) {
     else if (devOpen && devOpen.startsWith("visibility:")) {
       openVisibilityWindow(devOpen.slice("visibility:".length));
     }
+    if (process.env.OCX_DEV_START_SERVER) startManagerServer();
   });
 }
