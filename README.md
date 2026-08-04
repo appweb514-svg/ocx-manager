@@ -4,6 +4,10 @@ Gérez **plusieurs providers** dans Codex via le proxy [opencodex](https://githu
 
 > Projet officiel : **[lidge-jun/opencodex](https://github.com/lidge-jun/opencodex)** · paquet npm : [`@bitkyc08/opencodex`](https://www.npmjs.com/package/@bitkyc08/opencodex)
 
+## Aperçu
+
+![Tableau de bord OCX Manager](docs/screenshot.png)
+
 ## Fonctionnalités
 
 - **Tableau de bord web** (`http://localhost:10105`) : liste numérotée des providers, ajout depuis 64 presets (OpenRouter, Groq, Anthropic, Gemini, Ollama…), test, édition, activation/désactivation, suppression, provider par défaut.
@@ -22,7 +26,7 @@ opencodex (proxy, port 10100)
          └── app Win/Linux  (desktop/, Electron)
 ```
 
-Le serveur OCX Manager relève le token admin depuis `~/.opencodex/admin-api-token` et ne l'expose jamais aux interfaces. Les clés API saisies sont stockées dans la configuration locale d'opencodex — **aucun secret n'est versionné dans ce dépôt**.
+Le serveur OCX Manager relève le token admin depuis `~/.opencodex/admin-api-token` et ne l'expose jamais aux interfaces. Les clés API saisies sont stockées dans la configuration locale d'opencodex.
 
 ## Démarrage rapide
 
@@ -63,7 +67,6 @@ open OCXSwitcher.app
 
 - Le token admin d'opencodex est lu côté serveur (`~/.opencodex/admin-api-token`), jamais envoyé au navigateur ni aux apps.
 - Les clés API des providers restent dans la config locale d'opencodex (`~/.opencodex/config.json`).
-- Le dépôt ne contient ni clé, ni token, ni config utilisateur : tout est ignoré via `.gitignore`.
 
 ## Structure du projet
 
